@@ -1274,10 +1274,17 @@
                     drawCBezier(newPoints, partialPath, index);
                 }
                 
-                // Auto open letter after 2 seconds
+                // Auto animate card up and then open letter after 2 seconds
                 setTimeout(function() {
-                    $(".wrapperLetterForm").fadeIn();
-                    funcTimeoutLetter();
+                    $('.card').animate({
+                        top: '-90px'
+                    }, 'slow', function() {
+                        // After card animation completes, open the letter
+                        setTimeout(function() {
+                            $(".wrapperLetterForm").fadeIn();
+                            funcTimeoutLetter();
+                        }, 500);
+                    });
                 }, 2000);
             }
             const head = document.getElementsByTagName('head')[0];
@@ -1407,21 +1414,22 @@
             }, 100)
         }
         $(document).ready(function () {
-            $('.valentines').mouseenter(function () {
-                $('.card').stop().animate({
-                    top: '-90px'
-                }, 'slow');
-            }).mouseleave(function () {
-                $('.card').stop().animate({
-                    top: 0
-                }, 'slow');
-            });
+            // Disabled manual hover to allow auto animation
+            // $('.valentines').mouseenter(function () {
+            //     $('.card').stop().animate({
+            //         top: '-90px'
+            //     }, 'slow');
+            // }).mouseleave(function () {
+            //     $('.card').stop().animate({
+            //         top: 0
+            //     }, 'slow');
+            // });
 
-            $('.card').click(function () {
-                $('.box-content').addClass('active');
-                $(".wrapperLetterForm").fadeIn()
-                funcTimeoutLetter();
-            });
+            // $('.card').click(function () {
+            //     $('.box-content').addClass('active');
+            //     $(".wrapperLetterForm").fadeIn()
+            //     funcTimeoutLetter();
+            // });
 
             $('.fa-xmark').click(function () {
                 $('.wrapperLetterForm').css('display', 'none');
