@@ -674,6 +674,39 @@
 </head>
 
 <body>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="./image/Tặng em đoá hoa hồng - Dacol ft. Wang An Nan (Lyrics Video) - YouTube.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Auto play music on user interaction
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.5; // Set volume to 50%
+        bgMusic.currentTime = 20; 
+        
+        // Try to play music immediately
+        bgMusic.play().catch(function() {
+            // If autoplay is blocked, play on first user interaction
+            document.addEventListener('click', function playMusic() {
+                bgMusic.currentTime = 25; // Start from 25 seconds
+                bgMusic.play();
+                document.removeEventListener('click', playMusic);
+            }, { once: true });
+        });
+        
+        // Prevent music from being paused
+        bgMusic.addEventListener('pause', function() {
+            bgMusic.play();
+        });
+        
+        // When music loops, start from 25 seconds again
+        bgMusic.addEventListener('ended', function() {
+            bgMusic.currentTime = 25;
+            bgMusic.play();
+        });
+    </script>
 
     <svg style="display: none;" id="theSvg" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148"
         xml:space="preserve">
@@ -1109,7 +1142,7 @@
         // .textLetter text h2
         let indexText = 0;
         let textLetter = document.querySelector('.textLetter h2');
-        const textLetterH2 = "Gửi Hoàng Khả Ngân!";
+        const textLetterH2 = "Gửi em";
         let timoutTextLetter;
 
         function textCharLetter() {
@@ -1137,7 +1170,7 @@
         // chữ của thư bạn muốn gửi
         let indexTextContent = 0;
         let textLetterContent = document.querySelector('.contentLetter');
-        const textLetterP = "Hôm nay là ngày 20/10 anh chúc em luôn hạnh phúc và gặp nhiều may mắn trong cuộc sống nhá. Hãy luôn giữ mãi nụ cười trên môi nhá và đừng suy nghĩ nhiều về những thứ không đáng nha";
+        const textLetterP = "Hôm nay là ngày 20/10 anh chúc em có ngày lễ và một tuần mới ấm áp vui vẻ rạng ngời cùng ngập tràn những điều may mắn hạnh phúc, luôn tích cực tươi tắn, xinhh xắn, tràn đầy năng lượng và nở thêm thật nhiều nụ cười xinh tươi trên môi hơn nữa đó nhoaa. ❤️";
         let timoutTextLetterContent;
         function textCharLetterContent() {
             if (indexTextContent < textLetterP.length) {
